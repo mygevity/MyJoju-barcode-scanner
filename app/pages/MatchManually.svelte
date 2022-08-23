@@ -49,7 +49,6 @@ $: {
 }
 
 const search_for_ingredient = async () => {
-    console.log(search_query)
     if (!search_query.length) {
         ingredient_search_results = [];
         return;
@@ -69,6 +68,5 @@ const use_this_ingredient = async event => {
     const update_barcode = await action(`Assign barcode ${$scanned_item.barcode}: ${$scanned_item.name} to item ${selected_food.name}?`, 'Cancel',  ['Confirm']);
     if (update_barcode !== 'Confirm') return;
     const updated_food = await lambda.post('/admin/food/update', { id: selected_food.id, barcode: $scanned_item.barcode });
-    console.log(updated_food.name, updated_food.barcode)
 }
 </script>

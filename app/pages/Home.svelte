@@ -91,7 +91,6 @@ const find_manually = () => {
 const check_barcode = async () => {
     let url = `https://world.openfoodfacts.org/product/${barcode}`;
     let product_page = await http.getString(url);
-    console.log(product_page)
     $scanned_item.name = product_page.split('<title>')[1].split('</title>')[0];
 
     if ($scanned_item.name === 'Error') return console.log('not found');
@@ -112,7 +111,6 @@ const use_this_ingredient = async event => {
     const update_barcode = await action(`Assign barcode ${$scanned_item.barcode}: ${$scanned_item.name} to item ${selected_food.name}?`, 'Cancel',  ['Confirm']);
     if (update_barcode !== 'Confirm') return;
     const updated_food = await lambda.post('/admin/food/update', { id: selected_food.id, barcode: $scanned_item.barcode });
-    console.log(updated_food.name, updated_food.barcode)
 }
 
 onMount(async () => {
