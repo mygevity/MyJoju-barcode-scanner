@@ -3,8 +3,7 @@ import { ApplicationSettings, Http } from '@nativescript/core';
 import { requests } from '~/stores/spinner';
 
 const BASE_URL =
-    // isIOS ? 'http://localhost:3000' : 'http://10.0.2.2:3000';
-    'https://35lezyiq38.execute-api.eu-central-1.amazonaws.com/latest';
+    isIOS ? 'http://localhost:3000' : 'http://10.0.2.2:3000';
 
 const headers = () => ({
     'Content-Type': 'application/json',
