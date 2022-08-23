@@ -1,4 +1,6 @@
-<Wrapper>
+<Wrapper
+    on_navigated_to={ask_for_login}
+>
     {#if isIOS}
         <BorderedScanner
             on:scan-result={event => on_scan_result(event)}
@@ -7,7 +9,6 @@
     <label 
         text="Barcode"
         textAlignment="center"
-        on:layoutChanged={ask_for_login}
     />
     <label
         text={barcode}
@@ -131,9 +132,5 @@ const use_this_ingredient = async event => {
 
 onMount(async () => {
     $scanned_item = {};
-    // email = 'wesley.barrett@developyn.com';
-    // password = 'Test1234';
-
-    
 });
 </script>
