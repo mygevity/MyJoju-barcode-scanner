@@ -105,6 +105,7 @@ const ask_for_login = async () => {
     if (!login_response.token) return ask_for_login();
 
     ApplicationSettings.setString('token', login_response.token);
+    toast('Login Successful');
 }
 const check_barcode = async () => {
     let url = `https://world.openfoodfacts.org/product/${barcode}`;
