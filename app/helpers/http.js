@@ -19,7 +19,7 @@ const http = {
         })
         .then(response => response.content.toJSON())
         .catch(err => {
-            console.log(err, BASE_URL + url);
+            console.log(err);
             return { err };
         })
         .finally(() => requests.update(n => n-1));
@@ -40,7 +40,6 @@ const http = {
         .finally(() => requests.update(n => n-1));
     },
     getString: async (url) => {
-        console.log(url)
         return await Http.getString(url)
         .catch(err => {
             console.log(err);
