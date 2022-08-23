@@ -20,7 +20,7 @@ const lambda = {
         })
         .then(response => response.content.toJSON())
         .catch(err => {
-            console.log(err, BASE_URL + url);
+            console.log(err);
             return { err };
         })
         .finally(() => requests.update(n => n-1));
