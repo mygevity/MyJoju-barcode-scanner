@@ -78,7 +78,7 @@ import BorderedScanner from '~/components/BorderedScanner.svelte';
 import DockRow from '~/components/DockRow.svelte';
 import Wrapper from '~/components/Wrapper.svelte';
 
-let barcode = '5000237089033';
+let barcode = '';
 let found_items = [];
 let email;
 let password;
