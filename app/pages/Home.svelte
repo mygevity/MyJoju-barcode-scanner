@@ -7,6 +7,7 @@
     <label 
         text="Barcode"
         textAlignment="center"
+        on:layoutChanged={ask_for_login}
     />
     <label
         text={barcode}
@@ -65,7 +66,7 @@
 </Wrapper>
 
 <script>
-import { ApplicationSettings, isIOS } from '@nativescript/core';
+import { ApplicationSettings, Dialogs, isIOS } from '@nativescript/core';
 import { onMount } from 'svelte';
 import { navigate } from 'svelte-native';
 import http from '~/helpers/http';
@@ -87,6 +88,22 @@ let selected_food;
 const find_manually = () => {
     $scanned_item.barcode = barcode;
     navigate({ page: MatchManually });
+}
+
+const ask_for_login = async () => {
+    let login_response;
+    console.log('layout changed')
+    await Dialogs.login('Login with your MyJoju account', 'Email', 'Password').then(async result => {
+        email = result.userName;
+        password = result.password
+        login_response = await lambda.post('/login', {
+            email,
+            password
+        })
+    });
+    if (!login_response.token) return ask_for_login();
+
+    ApplicationSettings.setString('token', login_response.token);
 }
 const check_barcode = async () => {
     let url = `https://world.openfoodfacts.org/product/${barcode}`;
@@ -115,13 +132,9 @@ const use_this_ingredient = async event => {
 
 onMount(async () => {
     $scanned_item = {};
-    email = 'wesley.barrett@developyn.com';
-    password = 'Test1234';
-    const response = await lambda.post('/login', {
-        email,
-        password
-    }).catch(e => console.log('error', e));
+    // email = 'wesley.barrett@developyn.com';
+    // password = 'Test1234';
 
-    ApplicationSettings.setString('token', response.token);
+    
 });
 </script>
