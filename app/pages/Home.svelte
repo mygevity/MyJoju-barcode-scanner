@@ -116,8 +116,7 @@ const check_barcode = async () => {
 }
 
 const on_scan_result = event => {
-    scanner = event.detail.object
-    scanner.
+    scanner = event?.detail?.object
     barcode = event?.detail?.text;
     $scanned_item = {};
     found_items = [];
